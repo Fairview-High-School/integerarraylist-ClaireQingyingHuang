@@ -21,9 +21,9 @@ public class IntegerArrayList implements IntegerList{
     public void add(int index, Integer val){
         if (index<0 || index>=size)
             throw new IndexOutOfBoundsException("index: " + index);
+        int a=0;
         for (int i=index; i<data.length; i++)
         {
-            int a=0;
             temp[a] = data[i];
             a++;
         }
