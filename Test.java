@@ -66,6 +66,23 @@ public class Test {
         }
         System.out.println(list);
 
+        System.out.println("Test remove(index): remove  values from list");
+        System.out.println("Excepted: 10 20 30 40 50 60 70 80 90 100");
+        list.remove(11);
+        System.out.println(list);
+
+        System.out.println("Test remove(index): try to remove an item at invalid index(position 11) from the List");
+        System.out.println("expected: IndexOutOfBoundException: 11");
+        try {
+            System.out.println(list.remove(11));
+        }catch(IndexOutOfBoundsException e) {
+            System.out.println(e);
+        }
+
+        System.out.println("Test size(): try to get the size of the List");
+        System.out.println("expected: 10");
+        System.out.println(list.size());
+
         System.out.println("Test set(index, val): try to add an item at invalid index(position 11) from the List");
         System.out.println("expected: IndexOutOfBoundException: 11");
         try {
@@ -74,17 +91,41 @@ public class Test {
             System.out.println(e);
         }
 
-        System.out.println("Test remove(index): remove  values from list");
-        System.out.println("Excepted: 10 20 30 40 50");
-        int b=0;
-        for (int val=10; val<=50; val+=10)
-        {
-            list.set(b, val);
-            b++;
-        }
+        System.out.println("Test set(index, val): try to set the first item in the List to 0");
+        System.out.println("expected: 0 20 30 40 50 60 70 80 90 100");
+        list.set(0, 0);
         System.out.println(list);
 
+        System.out.println("Test contains(val): try to see if an element 10 is in the List");
+        System.out.println("expeted: false");
+        System.out.println(list.contains(10));
 
+        list.set(0, 10);
+
+        System.out.println("Test contains(val): try to see if an element 10 is in the List");
+        System.out.println("expeted: true");
+        System.out.println(list.contains(10));
+
+        System.out.println("Test indexOf(val): try to find a nonexist element's index in the List");
+        System.out.println("expected: -1");
+        System.out.println(list.indexOf(0));
+
+        System.out.println("Test indexOf(val): try to find an exist element's index in the List");
+        System.out.println("expected: 0");
+        System.out.println(list.indexOf(10));
+
+        IntegerArrayList other = new IntegerArrayList[10];
+        other = list;
+        System.out.println("Test equals(other): try to see if the 2 same lists are the equal");
+        System.out.println("expected: true");
+        System.out.println(list.equals(other));
+
+        other.clear();
+        System.out.println("Test equals(other): try to see if the 2 different lists are the equal");
+        System.out.println("expected: false");
+        System.out.println(list.equals(other));
+
+        
 
         
     }  
