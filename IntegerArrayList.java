@@ -14,35 +14,28 @@ public class IntegerArrayList implements IntegerList{
                 biggerArray[i] = data[i];
             data = biggerArray;
         }
-        data[size] = val;
         size++;
+        data[size] = val;
     }
 
     public void add(int index, Integer val){
         if (index<0 || index>=size)
             throw new IndexOutOfBoundsException("index: " + index);
-        int a=0;
-        for (int i=index; i<data.length; i++)
+        if (size >= data.length)
         {
-            temp[a] = data[i];
-            a++;
+            Integer[] bigger = new Integer[2*data.length];
+            for (int i=0; i<data.length; i++)
+            {
+                bigger[i]=data[i];
+            }
+            data = bigger;
         }
-        if (size+1 >= data.length)
+        for (int i=size-1; i>=index; i--)
         {
-            Integer[] biggerArray = new Integer[data.length*2];
-            for (int i=0; i<index; i++)
-                biggerArray[i] = data[i];
-            biggerArray[index] = val;
-            data = biggerArray + temp;
+            data[i+1] = data[i];
         }
-        else
-        {
-            for (int i=index; i<size-2; i++)
-                temp = data[i+1];
-                data[i+1] = data[i];
-                data[i+2] = temp;
-            data[index] = val;
-        }
+        data[index] =val;
+        size++;
         
     }
 
@@ -56,12 +49,15 @@ public class IntegerArrayList implements IntegerList{
         size = 0;
     }
 
-    public void remove(int index){
+    public Integer remove(int index){
         if (index<0 || index>=size)
             throw new IndexOutOfBoundsException("index: " + index);
+        int a = data[index];
         for (int i=index; i<size-1; i++)
             data[i] = data[i+1];
-        size-=1;
+
+        size--;
+        return a;
     }
 
     public Integer get(int index){
@@ -80,26 +76,26 @@ public class IntegerArrayList implements IntegerList{
         return false;
     }
 
-    public boolean contains(int val){
+    public boolean contains(Integer val){
         for (int i=0; i<size; i++)
             if (data[i]==val)
                 return true;
         return false;
     }
 
-    public int indexOf(int val){
+    public int indexOf(Integer val){
         for (int i=0; i<size; i++)
             if (data[i]==val)
                 return i;
         return -1;
     }
 
-    public boolean equals(IntegerArrayList other){
-        if (other.size != size)
+    public boolean equals(List<Integer> other){
+        if (other.size() != size)
             return false;
         for (int i=0; i<size; i++)
         {
-            if (data[i].equals(other[i])==false)
+            if (data[i].equals(other.get(i))==false)
                 return false;
         }
         return true;
